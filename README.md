@@ -33,26 +33,6 @@ The following lifecycle hooks are available:
 
 ## Getting Started
 
-### Prerequisites
-
-- Python 3.x installed on your system.
-
-### Installation
-
-1. Clone the repository:
-
-    ```bash
-    git clone https://github.com/yourusername/ProgramHooks.git
-    ```
-
-2. Navigate to the project directory:
-
-    ```bash
-    cd ProgramHooks
-    ```
-
-### Usage
-
 1. **Create Plugins**: Write your plugins in the `plugins` folder. Each plugin should define functions matching the hook names (e.g., `pre_init`, `post_init`, `pre_runtime`, `post_runtime`).
 
 2. **Run the Hook Manager**: Execute the `hook_manager.py` script to load the plugins and run the hooks.
