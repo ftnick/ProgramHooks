@@ -16,7 +16,6 @@ logger = structlog.get_logger("HookManager")
 class HookManager:
     def __init__(self):
         self.hooks = {
-            'internal': [],
             'pre_init': [],
             'post_init': [],
             'pre_runtime': [],
