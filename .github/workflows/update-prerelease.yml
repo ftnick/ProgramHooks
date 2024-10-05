@@ -12,12 +12,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Fetch all history for all branches
 
       - name: Merge main into prerelease
         run: |
           git config user.name "GitHub Action"
           git config user.email "action@github.com"
-          git checkout prerelease
+          git checkout prerelease || git checkout -b prerelease  # Check out prerelease or create it if it doesn't exist
           git merge main --no-ff --commit -m "Merge main into prerelease"
           git push origin prerelease
         env:
