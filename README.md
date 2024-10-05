@@ -105,4 +105,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-For further assistance or inquiries, feel free to open an issue in this repository.
+For further assistance or inquiries, feel free to open a [discussion](https://github.com/ftnick/ProgramHooks/discussions).
