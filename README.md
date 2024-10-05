@@ -1,6 +1,8 @@
-# ProgramHooks
+# ProgramHooks - How To Use
 
 ![V1ConsoleExample](v1example.png)
+
+**TO DOWNLOAD AND INSTALL PROGRAMHOOKS, REFER TO [DOWNLOAD.md](DOWNLOAD.md)**
 
 **ProgramHooks** is a flexible and dynamic framework for Python that allows you to define and manage lifecycle hooks in your applications. It provides a simple mechanism for pre-initialization, post-initialization, pre-runtime, and post-runtime hooks, enabling modular code design and easy integration of plugins.
 
