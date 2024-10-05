@@ -21,7 +21,7 @@ You can clone the repository using Git, which will allow you to get the latest u
 
 If you prefer, you can download the repository as a ZIP file.
 
-1. Go to the [ProgramHooks GitHub page](https://github.com/yourusername/ProgramHooks).
+1. Go to the [ProgramHooks GitHub page](https://github.com/ftnick/ProgramHooks).
 2. Click on the green "Code" button.
 3. Select "Download ZIP".
 4. Extract the contents to your desired location.
