@@ -34,6 +34,7 @@ Once you have downloaded the repository, you can delete the following files as t
 - LICENSE
 - README.md
 - v1example.png
+- .github (Delete the entire folder)
 - plugins/Example.py (DO NOT REMOVE THE PLUGINS FOLDER)
 
 You should be left with:
