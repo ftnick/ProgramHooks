@@ -1,0 +1,24 @@
+name: Auto-update prerelease branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-prerelease:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Merge main into prerelease
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git checkout prerelease
+          git merge main --no-ff --commit -m "Merge main into prerelease"
+          git push origin prerelease
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
