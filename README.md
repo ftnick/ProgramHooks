@@ -1,4 +1,4 @@
-# ProgramHooks - How To Use
+# ProgramHooks
 
 ![V1ConsoleExample](v1example.png)
 
