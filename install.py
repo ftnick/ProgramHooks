@@ -1,5 +1,6 @@
 import os
 import shutil
+import ctypes
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 exclude_files = {'hook_manager.py', 'install.py'}
@@ -21,3 +22,5 @@ for item in os.listdir(current_dir):
     elif os.path.isdir(item_path):
         shutil.rmtree(item_path)
         print(f"Deleted directory: {item_path}")
+
+ctypes.windll.user32.MessageBoxW(0, "You can now delete the install.py file as you won't need it anymore.", "Cleanup Complete", 0x40 | 0x1)
