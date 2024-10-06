@@ -13,7 +13,7 @@ To download the main framework file you can download the repository as a ZIP fil
 
 ### After Downloading the Repository
 
-Once you have downloaded the repository, you can run `install.bat` which cleans up and removes unnecessary files. 
+Once you have downloaded the repository, you can run `install.py` which cleans up and removes unnecessary files. 
 
 You should be left with:
 - /plugins (The plugins folder which contains _internal.py and other plugins)
