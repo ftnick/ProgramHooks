@@ -8,7 +8,7 @@ import structlog
 from typing import Callable, Dict, List, Any
 
 # Central Hook Manager
-# Last Updated: 6/10/2024
+# Last Updated: 5/10/2024
 # @ftnick
 
 structlog.stdlib.recreate_defaults()
@@ -36,7 +36,7 @@ class HookManager:
         """
         if stage in self.hooks:
             self.hooks[stage].append(func)
-            logger.debug(f"Registered hook '{func.__name__}' at stage '{stage}'")
+            logger.info(f"Registered hook '{func.__name__}' at stage '{stage}'")
         else:
             logger.error("Invalid hook stage passed to register_hook", stage=stage)
 
@@ -59,7 +59,7 @@ class HookManager:
             logger.warning(f"No hooks found for stage: {stage}, but still executed void")
         
         for hook in self.hooks[stage]:
-            logger.debug(f"Executing {hook.__name__} for stage: {stage}")
+            logger.info(f"Executing {hook.__name__} for stage: {stage}")
             try:
                 hook(*args, **kwargs)
             except Exception as e:
@@ -103,7 +103,7 @@ class HookManager:
         
         for name, func in inspect.getmembers(module, inspect.isfunction):
             if name in self.hooks:
-                logger.debug(f"Registering {name} from {module.__name__}")
+                logger.info(f"Registering {name} from {module.__name__}")
                 try:
                     self.register_hook(name, func)
                     valid_hooks += 1
@@ -114,4 +114,4 @@ class HookManager:
         
         end_time = time.time()
         duration = end_time - start_time
-        logger.debug(f"Loaded {valid_hooks} Hook(s) from {module.__name__}", duration=f"{duration:.6f} seconds")
+        logger.info(f"Loaded {valid_hooks} Hook(s) from {module.__name__}", duration=f"{duration:.6f} seconds")
