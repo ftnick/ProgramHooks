@@ -4,22 +4,7 @@ Welcome to the **ProgramHooks** framework! This document will guide you through 
 
 ## Downloading the Framework
 
-To download the main framework files, you have two options:
-
-### Option 1: Clone the Repository
-
-You can clone the repository using Git, which will allow you to get the latest updates easily.
-
-1. Open your terminal or command prompt.
-2. Run the following command:
-
-   ```bash
-   git clone https://github.com/yourusername/ProgramHooks.git
-   ```
-
-### Option 2: Download as ZIP
-
-If you prefer, you can download the repository as a ZIP file.
+To download the main framework file you can download the repository as a ZIP file.
 
 1. Go to the [ProgramHooks GitHub page](https://github.com/ftnick/ProgramHooks).
 2. Click on the green "Code" button.
@@ -28,20 +13,11 @@ If you prefer, you can download the repository as a ZIP file.
 
 ### After Downloading the Repository
 
-Once you have downloaded the repository, you can delete the following files as they aren't needed for the script to function:
-- .gitignore
-- example.py
-- LICENSE
-- README.md
-- v1example.png
-- .github (Delete the entire folder)
-- plugins/Example.py (DO NOT REMOVE THE PLUGINS FOLDER)
+Once you have downloaded the repository, you can run `install.bat` which cleans up and removes unnecessary files. 
 
 You should be left with:
-- /plugins (The plugins folder which contains _internal.py)
+- /plugins (The plugins folder which contains _internal.py and other plugins)
 - hook_manager.py
-
-This will help keep your project directory clean and focused on the necessary files.
 
 ### Main Framework File
 
