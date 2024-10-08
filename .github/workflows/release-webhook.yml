@@ -1,0 +1,29 @@
+name: Discord Release Webhook
+
+on:
+  release:
+    types: 
+      - published
+
+jobs:
+  send-webhook:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send Webhook to Discord
+      env:
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      run: |
+        # Check if it's a pre-release or full release
+        if [ "${{ github.event.release.prerelease }}" = "true" ]; then
+          RELEASE_TYPE="**Pre-release**"
+        else
+          RELEASE_TYPE="**Release**"
+        fi
+        
+        # Format the date in ISO 8601
+        RELEASE_DATE=$(date -d "${{ github.event.release.published_at }}" +%Y-%m-%dT%H:%M:%SZ)
+
+        # Send the webhook
+        curl -X POST -H "Content-Type: application/json" \
+          -d "{\"content\": \"${RELEASE_TYPE} Published by **${{ github.event.release.author.login }}**\n\n**Release Name**: ${{ github.event.release.name }}\n**Tag**: ${{ github.event.release.tag_name }}\n**Published at**: ${RELEASE_DATE}\n\n**Description**: ${{ github.event.release.body }}\n\n[Release Link](${{ github.event.release.html_url }})\"}" \
+          $DISCORD_WEBHOOK_URL
