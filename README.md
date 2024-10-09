@@ -46,13 +46,7 @@ The core concept behind **ProgramHooks** is to create a centralized hook manager
     - `pre_runtime`
     - `post_runtime`
 
-2. **Run the Hook Manager**: Execute the `hook_manager.py` script to load the plugins and run the hooks:
-
-    ```bash
-    python hook_manager.py
-    ```
-
-3. **Example Plugin**: Here’s a simple example of a plugin:
+2. **Example Plugin**: Here’s a simple example of a plugin:
 
     ```python
     # plugins/plugin_example.py
@@ -63,11 +57,10 @@ The core concept behind **ProgramHooks** is to create a centralized hook manager
         print(f"Post-Runtime User ID: {user_id}")
     ```
 
-    **Example For MainScript**: The main script using the example plugin might look like this:
-
+3. **Run the Main Script**: Execute your main script to import hook_manager and execute the plugins and run the hooks. The main script using the example plugin might look like this:
+    **(Not full example, please load plugins before executing hooks, for a more advanced example please go to the [example.py file](example.py).)**
     ```python
     hook_manager.execute_hooks('pre_init', "Initialization Data", config={"setting": "value"})
-    
     hook_manager.execute_hooks('post_runtime', timeplayed=21)
     ```
 
@@ -87,22 +80,15 @@ Hooks can accept arguments, allowing customization of their behavior. For instan
 
 ## Warnings
 
-- **Compatibility**: This framework is designed for Python 3.x. Ensure your environment is set up correctly.
-- **Performance**: Dynamic loading of plugins may introduce slight performance overhead. Use this feature judiciously, especially in performance-critical applications.
-- **Security**: Be cautious when loading external scripts. Ensure that all plugins are from trusted sources to avoid executing malicious code.
+- **Compatibility**: This framework is mainly designed and tested for Python 3.12.5, but may work on older versions.
+- **Performance**: Dynamic loading of plugins may introduce slight performance spikes and issues which are mostly present during main plugin loading and hook scanning via `.load_plugins(folder)`
+- **Security**: Be cautious when loading external scripts. Ensure that all plugins are from trusted sources to avoid executing malicious code. **PLEASE ONLY DOWNLOAD TRUSTED PLUGINS THAT I'VE VERIFIED AT THE [OFFICAL PLUGINS PAGE](https://programhooks.ftnick.xyz/plugins)**
 
 ---
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-## Acknowledgements
-
-- Inspired by various plugin systems and hook frameworks in software development.
-- Special thanks to the open-source community for their contributions.
 
 ---
 
