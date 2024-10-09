@@ -115,3 +115,12 @@ class HookManager:
         end_time = time.time()
         duration = end_time - start_time
         logger.info(f"Loaded {valid_hooks} Hook(s) from {module.__name__}", duration=f"{duration:.6f} seconds")
+
+if __name__ == "__main__":
+    message = (
+        "Warning: This script is not intended to be run directly. "
+        "It should be imported along with its class, HookManager. "
+        "For usage details, please visit: https://github.com/ftnick/ProgramHooks"
+    )
+    logger.fatal(message)
+    input("Press Enter to exit...")
