@@ -6,6 +6,7 @@ import sys
 import time
 import structlog
 import requests
+import threading
 from typing import Callable, Dict, List, Any
 from packaging.version import Version, InvalidVersion
 
@@ -65,6 +66,21 @@ try:
         logger.info("No releases found for the repository.")
 except requests.exceptions.RequestException as e:
     logger.error("Failed to check for ProgramHook updates", error=str(e))
+    
+def rwt(func, args=(), kwargs=None, timeout=10, hook_name="Function"):
+    if kwargs is None:
+        kwargs = {}
+    result = [None]
+    def target():
+        result[0] = func(*args, **kwargs)
+    thread = threading.Thread(target=target)
+    thread.start()
+    thread.join(timeout)
+    if thread.is_alive():
+        logger.warning(f"A hook function for {hook_name} has exceeded the set timeout parameter. The thread has been terminated.")
+        return None
+    else:
+        return result[0]
 
 class HookManager:
     def __init__(self, stages: List[str] = None):
@@ -115,7 +131,8 @@ class HookManager:
         for hook in self.hooks[stage]:
             logger.info(f"Executing {hook.__name__} for stage: {stage}")
             try:
-                hook(*args, **kwargs)
+                rwt(hook, *args, **kwargs, hook_name = hook.__name__)
+                # hook(*args, **kwargs) #* No timeout method
             except Exception as e:
                 logger.error(f"Failed to execute {hook.__name__}", error=str(e))
 
