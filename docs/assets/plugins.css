@@ -1,0 +1,25 @@
+#plugin-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#plugin-list li {
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+#plugin-list a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+#plugin-list a:hover {
+    text-decoration: underline;
+}
+
+#plugin-list p {
+    margin: 5px 0;
+}
