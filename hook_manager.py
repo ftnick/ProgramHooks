@@ -14,6 +14,8 @@ from packaging.version import Version, InvalidVersion
 # @ftnick
 CURRENT_VERSION = "v1.3"
 
+os.makedirs("plugins", exist_ok=True)
+
 structlog.stdlib.recreate_defaults()
 logger = structlog.get_logger("HookManager")
 
@@ -135,6 +137,7 @@ class HookManager:
                 module = importlib.import_module(module_name)
                 self._register_module_hooks(module)
                 valid_plugins += 1
+                logger.debug("Loaded plugin", plugin=module_name)
             except ImportError as e:
                 logger.warning(
                     "Failed to load plugin", plugin=module_name, error=str(e)
