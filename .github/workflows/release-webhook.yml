@@ -23,7 +23,10 @@ jobs:
         # Format the date in ISO 8601
         RELEASE_DATE=$(date -d "${{ github.event.release.published_at }}" +%Y-%m-%dT%H:%M:%SZ)
 
+        # Escape any problematic characters in the release body
+        BODY=$(echo "${{ github.event.release.body }}" | jq -Rsa .)
+
         # Send the webhook
         curl -X POST -H "Content-Type: application/json" \
-          -d "{\"content\": \"${RELEASE_TYPE} Published by **${{ github.event.release.author.login }}**\n\n**Release Name**: ${{ github.event.release.name }}\n**Tag**: ${{ github.event.release.tag_name }}\n**Published at**: ${RELEASE_DATE}\n\n**Description**: ${{ github.event.release.body }}\n\n[Release Link](${{ github.event.release.html_url }})\"}" \
+          -d "{\"content\": \"${RELEASE_TYPE} Published by **${{ github.event.release.author.login }}**\n\n**Release Name**: ${{ github.event.release.name }}\n**Tag**: ${{ github.event.release.tag_name }}\n**Published at**: ${RELEASE_DATE}\n\n**Description**: ${BODY}\n\n[Release Link](${{ github.event.release.html_url }})\"}" \
           $DISCORD_WEBHOOK_URL
