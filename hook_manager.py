@@ -5,71 +5,21 @@ import inspect
 import sys
 import time
 import structlog
-import requests
 import threading
 from typing import Callable, Dict, List, Any
-from packaging.version import Version, InvalidVersion
 
 # Central Hook Manager
 # Last Updated: 5/10/2024
 # @ftnick
-CURRENT_VERSION = "v1.3"
 
 os.makedirs("plugins", exist_ok=True)
 
 structlog.stdlib.recreate_defaults()
 logger = structlog.get_logger("HookManager")
-
-def is_prerelease(version_str: str) -> bool:
-    """Determine if the version string corresponds to a pre-release."""
-    try:
-        version = Version(version_str)
-        return version.is_prerelease
-    except InvalidVersion:
-        return False
-
-def get_numeric_version(version_str: str) -> str:
-    """Extract the numeric part of the version string."""
-    try:
-        return Version(version_str).base_version
-    except InvalidVersion:
-        return None
-
-try:
-    response = requests.get("https://api.github.com/repos/ftnick/ProgramHooks/releases")
-    response.raise_for_status()
-    releases = response.json()
-    latest_version = Version(CURRENT_VERSION)
-    latest_release_tag = None
-    if releases:
-        for release in releases:
-            release_tag = release["tag_name"].lstrip("v")
-            try:
-                release_version = Version(release_tag)
-            except InvalidVersion:
-                logger.debug(f"Skipping invalid version tag: {release_tag}")
-                continue
-            if release["prerelease"] or release_version.is_prerelease:
-                logger.debug(f"Skipping prerelease version: {release_tag}")
-                continue
-            if release_version > latest_version:
-                latest_version = release_version
-                latest_release_tag = release_tag
-        if latest_version == Version(CURRENT_VERSION):
-            logger.info(f"Your script is up-to-date with version {CURRENT_VERSION}.")
-        elif latest_version > Version(CURRENT_VERSION):
-            logger.warning(
-                f"Your script is outdated! Latest release is version {latest_release_tag}, "
-                f"but you're using version {CURRENT_VERSION}."
-            )
-    else:
-        logger.info("No releases found for the repository.")
-except requests.exceptions.RequestException as e:
-    logger.error("Failed to check for ProgramHook updates", error=str(e))
     
 def rwt(func, args=(), kwargs=None, timeout=10, hook_name="Function"):
     if kwargs is None:
-        kwargs = {}
+        kwargs = {} 
     result = [None]
     def target():
         result[0] = func(*args, **kwargs)
